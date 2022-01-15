@@ -4,6 +4,7 @@ class User {
     
 public $username;
 private $email;
+public $role = "member";
 
 public function __construct($username, $email) {
     $this->username = $username;
@@ -12,6 +13,10 @@ public function __construct($username, $email) {
 
 public function addFriend() {
     return "$this->username added a friend";
+}
+
+public function message() {
+    return "$this->email . send a new message";
 }
 
 //get email
@@ -32,10 +37,15 @@ public function setEmail($email) {
 class AdminUser extends User {
 
     public $level;
+    // public $role = "admin";
 
     public function __construct($username, $email, $level) {
         $this->level = $level;
         parent::__construct($username, $email);
+    }
+
+    public function message() {
+        return "$this->email . an admin, send a new message";
     }
 
 
@@ -45,15 +55,14 @@ $userOne = new User("mario", "mario@thenetninja.co.uk");
 $userTwo = new User("luigi", "luigi@thenetninja.co.uk");
 $userThree = new AdminUser("yoshi", "yoshi@thenetninja.co.uk", 5);
 
-echo $userThree->level . "<br>";
-echo $userThree->getEmail() . "<br>";
-echo $userThree->username . "<br>";
+echo $userOne->role . "<br>";
+echo $userThree->role . "<br>";
+
+echo $userOne->message() . "<br>";
+echo $userThree->message() . "<br>";
 
 
-// $userOne->setEmail("byenna21@gmail.com");
 
-// echo $userOne->getEmail() . "<br>";
-// echo $userTwo->getEmail() . "<br>";
 
 
 // print_r(get_class_methods('User'));
