@@ -3,7 +3,7 @@
 class User {
     
 public $username;
-private $email;
+protected $email;
 public $role = "member";
 
 public function __construct($username, $email) {
@@ -11,9 +11,14 @@ public function __construct($username, $email) {
     $this->email = $email;
 }
 
+
+
+
 public function addFriend() {
     return "$this->username added a friend";
 }
+
+
 
 public function message() {
     return "$this->email . send a new message";
@@ -30,6 +35,11 @@ public function setEmail($email) {
     if(strpos($email, "@") > -1) {
        $this->email = $email; 
     }
+    
+}
+
+public function __clone() {
+    echo "This user $this->username is a clone <br>";
     
 }
 }
@@ -55,11 +65,13 @@ $userOne = new User("mario", "mario@thenetninja.co.uk");
 $userTwo = new User("luigi", "luigi@thenetninja.co.uk");
 $userThree = new AdminUser("yoshi", "yoshi@thenetninja.co.uk", 5);
 
-echo $userOne->role . "<br>";
-echo $userThree->role . "<br>";
+$userFour = clone $userOne;
+echo $userOne->username . "<br>";
+echo $userFour->username . "<br>";
+// echo $userThree->role . "<br>";
 
-echo $userOne->message() . "<br>";
-echo $userThree->message() . "<br>";
+// echo $userOne->message() . "<br>";
+// echo $userThree->message() . "<br>";
 
 
 
